@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    h2 { color: #333; }
+    .info { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <h2>New Bulk Order Received</h2>
+  <div class="info"><strong>Product:</strong> {{ product.name }} (ID: {{ product.id }})</div>
+  <div class="info"><strong>Customer:</strong> {{ customer_name }}</div>
+  <div class="info"><strong>Email:</strong> {{ email }}</div>
+  <div class="info"><strong>Phone:</strong> {{ phone }}</div>
+  <div class="info"><strong>Quantity:</strong> {{ quantity }}</div>
+  <div class="info"><strong>Message:</strong> {{ message|default:"N/A" }}</div>
+</body>
+</html>

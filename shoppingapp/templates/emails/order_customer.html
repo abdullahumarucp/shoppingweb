@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .thanks { font-size: 18px; color: #444; }
+  </style>
+</head>
+<body>
+  <h2>Thank You for Your Order!</h2>
+  <p class="thanks">Dear {{ customer_name }},</p>
+  <p>We have received your bulk order request. Here are the details:</p>
+  <ul>
+    <li><strong>Product:</strong> {{ product.name }}</li>
+    <li><strong>Quantity:</strong> {{ quantity }}</li>
+    <li><strong>Message:</strong> {{ message|default:"N/A" }}</li>
+  </ul>
+  <p>We will contact you shortly.</p>
+  <p>Best regards,<br><strong>Rangrez Studio</strong></p>
+</body>
+</html>

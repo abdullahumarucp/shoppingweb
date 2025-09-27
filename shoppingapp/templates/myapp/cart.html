@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+{% include 'myapp/navbar.html' %}
+
+<div class="container mt-5">
+    <h2 class="mb-4">🛒 Your Shopping Cart</h2>
+
+    {% if cart_items %}
+    <table class="table table-bordered align-middle">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr class="text-center">
+                <!-- Product Image -->
+                <td>
+                    <a href="{% url 'product_detail' item.product.id %}?edit_cart={{ item.id }}">
+                        {% if item.product.image %}
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
+                                 class="img-thumbnail" style="width:80px;height:80px;object-fit:cover;">
+                        {% else %}
+                            <img src="{% static 'images/no-image.png' %}" alt="No Image"
+                                 class="img-thumbnail" style="width:80px;height:80px;object-fit:cover;">
+                        {% endif %}
+                    </a>
+                </td>
+
+                <!-- Product Info -->
+                <td class="text-start">
+                    <strong>{{ item.product.name }}</strong><br>
+                    <small class="text-muted">Size: {{ item.size }} | Color: {{ item.color }}</small><br>
+                    <a href="{% url 'product_detail' item.product.id %}?edit_cart={{ item.id }}"
+                       class="btn btn-sm btn-outline-primary mt-2">
+                       Change Size/Color
+                    </a>
+                </td>
+
+                <!-- Quantity -->
+                <td>{{ item.quantity }}</td>
+
+                <!-- Price & Total -->
+                <td>Rs {{ item.product.price }}</td>
+                <td>Rs {{ item.total_price }}</td>
+
+                <!-- Remove -->
+                <td>
+                    <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-sm btn-danger">
+                        Remove
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h4 class="text-end">Grand Total: Rs {{ total }}</h4>
+    <a href="{% url 'checkout' %}" class="btn btn-success float-end">Proceed to Checkout</a>
+
+    {% else %}
+    <p>Your cart is empty. <a href="/">Continue shopping</a></p>
+    {% endif %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

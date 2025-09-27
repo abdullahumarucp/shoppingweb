@@ -1,0 +1,9 @@
+from django.apps import AppConfig
+
+
+class ShoppingappConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'shoppingapp'
+
+    def ready(self):
+        import shoppingapp.signals
